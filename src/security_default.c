@@ -353,7 +353,7 @@ int mosquitto_acl_check_default(struct mosquitto_db *db, struct mosquitto *conte
 		 * id to bypass ACL checks (or have a username/client id that cannot
 		 * publish or receive messages to its own place in the hierarchy).
 		 */
-		if(context->username && strpbrk(context->username, "+#")){
+		if(context->username && strpbrk(context->username, "#")){ //Venkat: Not allowing + means emails + plus sign which we often use.
 			log__printf(NULL, MOSQ_LOG_NOTICE, "ACL denying access to client with dangerous username \"%s\"", context->username);
 			return MOSQ_ERR_ACL_DENIED;
 		}
